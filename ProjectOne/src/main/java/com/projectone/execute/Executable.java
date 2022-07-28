@@ -1,7 +1,5 @@
 package com.projectone.execute;
 
-import com.projectone.model.Tickets;
-import com.projectone.repository.ProjectOneRepository;
 
 public class Executable {
 
@@ -14,9 +12,14 @@ public class Executable {
 		 * ProjectOneRepository.saveEmployee(employee);
 		 */
 		
-		Tickets ticket = new Tickets(0, 100, "java certification", "certification", "pending", false, "jon@gmail.com");
+		/*
+		 * Tickets ticket = new Tickets(0, 100, "java certification", "certification",
+		 * "pending", false, "jon@gmail.com");
+		 * 
+		 * ProjectOneRepositoryEmployee.saveTicket(ticket);
+		 */
+
 		
-		ProjectOneRepository.saveTicket(ticket);
 	}
 	
 

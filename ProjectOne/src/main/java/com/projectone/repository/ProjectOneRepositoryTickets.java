@@ -174,19 +174,18 @@ public static void saveTicket(Tickets ticket) {
 	public static boolean isProcessed(int ticketid) {
 		
 		Connection conn = null;
-		PreparedStatement stmt = null;
+		Statement stmt = null;
 		ResultSet set = null;
+		boolean isprocessed = true;
 		
-		final String SQL = "select processed from tickets where id = ?";
+		String SQL = "select processed from tickets where id = " + ticketid;
 		
 		try {
 			conn = ConnectionUtility.getNewConnection();
-			stmt = conn.prepareStatement(SQL);
-			stmt.setInt(1, ticketid);
-			set = stmt.executeQuery();
-	
-			return set.next();
-			
+			stmt = conn.createStatement();
+			set = stmt.executeQuery(SQL);
+			set.next();
+			isprocessed = set.getBoolean(1);
 		
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -203,12 +202,11 @@ public static void saveTicket(Tickets ticket) {
 		    }
 	    }
 	
-	return true;
+	return isprocessed;
 	}
 	
 	public static boolean approveticket(Tickets ticket, String approval) {
 		
-		System.out.println(ProjectOneRepositoryTickets.isProcessed(ticket.getTicketid()));
 		if (!ProjectOneRepositoryTickets.isProcessed(ticket.getTicketid())) {
 			ticket.setApproval(approval);
 			ticket.setProcessed(true);

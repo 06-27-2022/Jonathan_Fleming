@@ -134,7 +134,7 @@ public static List<Employee> findAllEmployees() {
 		
 		employee = ProjectOneRepositoryEmployee.findByUsername(username);
 		
-		if (password.equals(employee.getPassword())) {
+		if ((employee != null) && password.equals(employee.getPassword())) {
 			return true;
 		}
 		

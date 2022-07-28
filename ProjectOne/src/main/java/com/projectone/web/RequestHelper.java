@@ -41,12 +41,12 @@ public class RequestHelper {
 		case "tickets":
 			response.setContentType("application/json");
 			writer = response.getWriter();
-			writer.write(ticketController.findAll(request, response)); //save test
+			writer.write(ticketController.findAll(request, response));
 			break;
 			
 		case "mytickets":
+			session = request.getSession(false);
 			if (session !=null) {
-				System.out.println(username);
 				response.setContentType("application/json");
 				writer = response.getWriter();
 				writer.write(ticketController.findByAccount(username));
@@ -81,6 +81,7 @@ public class RequestHelper {
 			break;
 			
 		case "settings" :
+			session = request.getSession(false);
 			if(session != null)	{
 				employeeController.save(request, response);
 				response.setStatus(201);
@@ -98,17 +99,20 @@ public class RequestHelper {
 			break;
 		
 		case "logout":
+			session = request.getSession(false);
 			if(session != null) {
 				session.invalidate();
 				response.setStatus(200);
 				username = null;
 				password = null;
-			}else {
+			}
+			else {
 				response.setStatus(400);
 			}
 			break;
 		
 		case "submitticket":
+			session = request.getSession(false);
 			if(session !=null) {
 				ticketController.save(request, response);
 				response.setStatus(201);
@@ -118,6 +122,7 @@ public class RequestHelper {
 			break;
 
 		case "managetickets":
+			session = request.getSession(false);
 			if (session != null) {
 				if(ProjectOneRepositoryEmployee.checkIfManager(username)) {
 					if (ticketController.ticketapproval(request, response)) {

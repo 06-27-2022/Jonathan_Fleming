@@ -20,7 +20,6 @@ public class EmployeeController {
 	
 	public String findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String json = objectMapper.writeValueAsString(ProjectOneRepositoryEmployee.findAllEmployees());
-		System.out.println(json);
 		return json;
 	}
 	
